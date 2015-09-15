@@ -11,8 +11,7 @@ class shopPhmaskPluginBackendSaveController extends waJsonController {
             foreach ($shop_begstroka as $name => $value) {
                 $app_settings_model->set($this->plugin_id, $name, $value);
             }
-
-
+            
             $this->response['message'] = "Сохранено";
         } catch (Exception $e) {
             $this->setError($e->getMessage());
