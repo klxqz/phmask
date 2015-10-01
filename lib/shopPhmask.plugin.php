@@ -2,17 +2,29 @@
 
 class shopPhmaskPlugin extends shopPlugin {
 
+    public static $plugin_id = array('shop', 'phmask');
+    public static $default_settings = array(
+        'status' => '1',
+        'maska' => '+7(999) 999-9999',
+        'selector' => 'input[name="customer[phone]"],input[name="data[phone]"]'
+    );
+
     public function frontendHead() {
 
         if (!$this->getSettings('status')) {
             return false;
         }
+        if(!shopPhmask::getDomainSetting('status')){
+            return false;
+        }
         $view = wa()->getView();
-        $view->assign('maska', $this->getSettings('maska'));
-        $view->assign('selector', $this->getSettings('selector'));
+        $view->assign('maska', shopPhmask::getDomainSetting('maska'));
+        $view->assign('selector', shopPhmask::getDomainSetting('selector'));
         $template_path = wa()->getAppPath('plugins/phmask/templates/FrontendHead.html', 'shop');
         $html = $view->fetch($template_path);
         return $html;
     }
+
+    
 
 }

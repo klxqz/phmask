@@ -2,17 +2,22 @@
 
 class shopPhmaskPluginBackendSaveController extends waJsonController {
 
-    protected $plugin_id = array('shop', 'phmask');
-
     public function execute() {
         try {
             $app_settings_model = new waAppSettingsModel();
-            $shop_begstroka = waRequest::post('shop_phmask');
-            foreach ($shop_begstroka as $name => $value) {
-                $app_settings_model->set($this->plugin_id, $name, $value);
-            }
+            $settings = waRequest::post('shop_phmask', array());
+            $domains_settings = waRequest::post('domains_settings', array());
+            $reset = waRequest::post('reset');
             
-            $this->response['message'] = "Сохранено";
+            foreach ($settings as $name => $value) {
+                $app_settings_model->set(shopPhmaskPlugin::$plugin_id, $name, $value);
+            }
+            if ($reset) {
+                $domains_settings = array();
+            }
+            shopPhmask::saveDomainsSettings($domains_settings);
+
+           $this->response['message'] = "Сохранено";
         } catch (Exception $e) {
             $this->setError($e->getMessage());
         }
