@@ -4,7 +4,7 @@ return array(
     'name' => 'Маска для телефона',
     'description' => 'Ввод телефона по маске заданного формата',
     'vendor' => '985310',
-    'version' => '1.1.0',
+    'version' => '1.1.1',
     'img' => 'img/phmask.png',
     'shop_settings' => true,
     'frontend' => true,

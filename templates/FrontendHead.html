@@ -1,7 +1,8 @@
 <script type="text/javascript" src="{$wa_app_static_url}plugins/phmask/js/maskedinput.js"></script> 
-
 <script type="text/javascript">
     jQuery(function ($) {
-        $('{$selector}').mask("{$maska}");
+        $(document).on('focus', 'input', function () {
+            $('{$selector}').mask("{$maska}");
+        });
     });
 </script>
