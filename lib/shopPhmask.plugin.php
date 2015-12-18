@@ -10,11 +10,11 @@ class shopPhmaskPlugin extends shopPlugin {
     );
 
     public function frontendHead() {
-
+        
         if (!$this->getSettings('status')) {
             return false;
         }
-        if(!shopPhmask::getDomainSetting('status')){
+        if (!shopPhmask::getDomainSetting('status') || (wa()->getUser()->isAuth() && shopPhmask::getDomainSetting('no_auth'))) {
             return false;
         }
         $view = wa()->getView();
@@ -24,7 +24,5 @@ class shopPhmaskPlugin extends shopPlugin {
         $html = $view->fetch($template_path);
         return $html;
     }
-
-    
 
 }

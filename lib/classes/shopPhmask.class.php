@@ -45,13 +45,9 @@ class shopPhmask {
     }
 
     public static function saveDomainsSettings($domains_settings) {
-
-
         $app_settings_model = new waAppSettingsModel();
         $routing = wa()->getRouting();
         $domains_routes = $routing->getByApp('shop');
-
-
         $app_settings_model->set(shopPhmaskPlugin::$plugin_id, 'domains_settings', json_encode($domains_settings));
         $cache = new waSerializeCache('shopPhmaskPlugin');
         if ($cache && $cache->isCached()) {
@@ -75,7 +71,9 @@ class shopPhmask {
     public static function getDomainSettings() {
         $domains_settings = self::getDomainsSettings();
         $hash = self::getRouteHash();
-        return $domains_settings[$hash];
+        if (!empty($domains_settings[$hash])) {
+            return $domains_settings[$hash];
+        }
     }
 
     public static function getDomainSetting($name) {

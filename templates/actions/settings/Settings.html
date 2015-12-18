@@ -56,6 +56,15 @@
                     </div>
                     <div class="field" {if !$settings.status} style="display:none"{/if}>
                         <div class="name">
+                            Не использовать для авторизированных пользователей
+                        </div>
+                        <div class="value">
+                            <input type="hidden" name="domains_settings[{$domain_hash}][no_auth]" value="0" >
+                            <input type="checkbox" name="domains_settings[{$domain_hash}][no_auth]" value="1"{if $settings.no_auth|default:0} checked{/if}>
+                        </div>
+                    </div>
+                    <div class="field" {if !$settings.status} style="display:none"{/if}>
+                        <div class="name">
                             Маска
                         </div>
                         <div class="value">
